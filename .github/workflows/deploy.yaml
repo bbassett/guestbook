@@ -50,6 +50,9 @@ jobs:
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
           echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
 
+      - name: Log a var
+        run: echo ${{ secrets.DOCKERHUB_USERNAME }}
+
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
