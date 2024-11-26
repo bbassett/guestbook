@@ -9,7 +9,7 @@
 # https://github.com/docker/awesome-compose
 services:
   watchtower:
-    image: containerrr/watchtower
+    image: containrrr/watchtower
     command:
       - "--label-enable"
       - "--interval"
@@ -36,7 +36,7 @@ services:
       - letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
   server:
-    image: ghcr.io/bbassett/guestbook/guestbook
+    image: bbassett0/guestbook:prod
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.server.rule=Host(`brandonbassett.com`)"
