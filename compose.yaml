@@ -59,6 +59,29 @@ services:
     restart: always
     depends_on:
       - db
+  server:
+    image: bbassett0/guestbook:prod
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.server.rule=Host(`blog.brandonbassett.com`)"
+      - "traefik.http.routers.server.entrypoints=websecure"
+      - "traefik.http.routers.server.tls.certresolver=myresolver"
+      - "com.centurylinklabs.watchtower.enable=true"
+    secrets:
+      - db-password
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=guestbook
+      - POSTGRES_PORT=5432
+      - POSTGRES_SSLMODE=disable
+    deploy:
+      mode: replicated
+      replicas: 1
+    restart: always
+    depends_on:
+      - db
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
