@@ -59,13 +59,13 @@ services:
     restart: always
     depends_on:
       - db
-  server:
+  blog:
     image: bbassett0/guestbook:prod
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.server.rule=Host(`blog.brandonbassett.com`)"
-      - "traefik.http.routers.server.entrypoints=websecure"
-      - "traefik.http.routers.server.tls.certresolver=myresolver"
+      - "traefik.http.routers.blog.rule=Host(`blog.brandonbassett.com`)"
+      - "traefik.http.routers.blog.entrypoints=websecure"
+      - "traefik.http.routers.blog.tls.certresolver=myresolver"
       - "com.centurylinklabs.watchtower.enable=true"
     secrets:
       - db-password
