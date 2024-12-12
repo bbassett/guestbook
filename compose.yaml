@@ -17,6 +17,8 @@ services:
       - "--rolling-restart"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /home/brandon/.docker/config.json:/config.json
+
   reverse-proxy:
     image: traefik:v3.1
     command:
